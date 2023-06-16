@@ -74,6 +74,10 @@ td.alive {
   color: #fff;
 }
 
+div.cell-content {
+  aspect-ratio: 1/1;
+}
+
 @media screen and (max-width: 767px) {
   .table {
     width: auto !important;
