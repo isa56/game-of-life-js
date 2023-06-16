@@ -9,7 +9,24 @@ for (let i = 0; i < ROWS_NUMBER; i++) {
 }
 
 const tableElement = document.querySelector("#table");
+const tableCellsElement = document.querySelectorAll("td");
+
 const btnGameElement = document.querySelector("#gameOfLifeController");
+
+for (let i = 0; i < ROWS_NUMBER; i++) {
+  for (let j = 0; j < COLS_NUMBER; j++) {
+    let cell = tableElement.rows[i].cells[j];
+    cell.addEventListener("click", () => {
+      if (cell.classList.contains("alive")) {
+        cell.classList.remove("alive");
+        table[i][j] = false;
+      } else {
+        cell.classList.add("alive");
+        table[i][j] = true;
+      }
+    });
+  }
+}
 
 btnGameElement.addEventListener("click", () => {
   shouldContinue = !shouldContinue;
@@ -26,7 +43,7 @@ btnGameElement.addEventListener("click", () => {
 
 resetTable();
 
-generateMatrix();
+// generateMatrix();
 
 function generateMatrix() {
   for (let i = 0; i < ROWS_NUMBER; i++) {
