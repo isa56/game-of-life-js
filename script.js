@@ -90,6 +90,7 @@ function countNumberOfLiveNeighbors(cellRow, cellCol) {
 
 function playGame() {
   let neighborsAlive = 0;
+  let newTable = table.map(arr => arr.slice());
 
   let generationsNumber = 0;
 
@@ -99,18 +100,22 @@ function playGame() {
         neighborsAlive = countNumberOfLiveNeighbors(i, j);
 
         if (table[i][j] && (neighborsAlive == 2 || neighborsAlive == 3)) {
-          table[i][j] = true;
+          // cell keeps living
+          newTable[i][j] = true;
           tableElement.rows[i].cells[j].classList.add("alive");
         } else if (!table[i][j] && neighborsAlive == 3) {
-          table[i][j] = true;
+          // cell is born
+          newTable[i][j] = true;
           tableElement.rows[i].cells[j].classList.add("alive");
         } else {
-          table[i][j] = false;
+          // cell dies by overcrowding or underpopulation
+          newTable[i][j] = false;
           tableElement.rows[i].cells[j].classList.remove("alive");
         }
       }
     }
     generationsNumber++;
+    table = newTable.map(arr => arr.slice());
 
     if (generationsNumber == desiredGenerationsNumber || !shouldContinue) {
       clearInterval(interval);
