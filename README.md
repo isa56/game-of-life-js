@@ -28,6 +28,6 @@ The game run on two simple functions: one that defines the number of live neighb
 
 It is a cellular automata because it has states that are changed in each iteration, and the next state of each cell depends on the current state of the cell and its neighbors. The states are the cells being alive or dead, and the neighbors are the cells around it.
 
-### Thank you for trying this project!
+## Thank you for trying this project!
 
 ![Glider's states animation](https://github.com/isa56/game-of-life-js/blob/main/gameoflife.gif)

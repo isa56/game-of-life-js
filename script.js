@@ -18,6 +18,21 @@ const tableCellsElement = document.querySelectorAll("td");
 
 const btnGameElement = document.querySelector("#gameOfLifeControllerBtn");
 const resetBtnElement = document.querySelector("#resetBtn");
+const modalOpenerElement = document.querySelector("#openModalBtn");
+const modalCloserElement = document.querySelectorAll("#closeModalBtn");
+
+// Add event listener to the button that opens the modal
+modalOpenerElement.addEventListener("click", () => {
+  console.log(document.querySelector("#modal"));
+  document.querySelector("#modal").classList.add("open");
+});
+
+// Add event listener to everything that closes the modal (button, X and outside click)
+modalCloserElement.forEach((el) =>
+  el.addEventListener("click", () => {
+    document.querySelector("#modal").classList.remove("open");
+  })
+);
 
 // Add event listener to each cell that is clicked by the user
 for (let i = 0; i < ROWS_NUMBER; i++) {
