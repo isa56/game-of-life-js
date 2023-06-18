@@ -1,18 +1,25 @@
 const ROWS_NUMBER = 20;
 const COLS_NUMBER = 20;
 
+// Create Array of ROWS
 let table = new Array(ROWS_NUMBER);
+// Values from DOM
 let shouldContinue = false;
 let desiredGenerationsNumber;
+
+// Create Arrays of COLUMNS to create a matrix
 for (let i = 0; i < ROWS_NUMBER; i++) {
   table[i] = new Array(COLS_NUMBER);
 }
 
+// DOM Elements used
 const tableElement = document.querySelector("#table");
 const tableCellsElement = document.querySelectorAll("td");
 
-const btnGameElement = document.querySelector("#gameOfLifeController");
+const btnGameElement = document.querySelector("#gameOfLifeControllerBtn");
+const resetBtnElement = document.querySelector("#resetBtn");
 
+// Add event listener to each cell that is clicked by the user
 for (let i = 0; i < ROWS_NUMBER; i++) {
   for (let j = 0; j < COLS_NUMBER; j++) {
     let cell = tableElement.rows[i].cells[j];
@@ -28,6 +35,7 @@ for (let i = 0; i < ROWS_NUMBER; i++) {
   }
 }
 
+// Add event listener to the button that starts the game
 btnGameElement.addEventListener("click", () => {
   shouldContinue = !shouldContinue;
   desiredGenerationsNumber = Number(
@@ -41,10 +49,14 @@ btnGameElement.addEventListener("click", () => {
   }
 });
 
+resetBtnElement.addEventListener("click", resetTable);
+
+// Resets the game
 resetTable();
 
 // generateMatrix();
 
+// Debug function to generate a random matrix and test the other functions
 function generateMatrix() {
   for (let i = 0; i < ROWS_NUMBER; i++) {
     for (let j = 0; j < COLS_NUMBER; j++) {
@@ -56,6 +68,7 @@ function generateMatrix() {
   }
 }
 
+// Resets the matrix and the table
 function resetTable() {
   for (let i = 0; i < ROWS_NUMBER; i++) {
     for (let j = 0; j < COLS_NUMBER; j++) {
@@ -65,11 +78,14 @@ function resetTable() {
   }
 }
 
+// Counts the number of live neighbors of a cell
 function countNumberOfLiveNeighbors(cellRow, cellCol) {
   let liveNeighbors = 0;
 
+  // Goes into each neighbor of the cell
   for (let i = cellRow - 1; i <= cellRow + 1; i++) {
     for (let j = cellCol - 1; j <= cellCol + 1; j++) {
+      // Ignores the cell itself and the out of bounds cells
       if (
         i < 0 ||
         j < 0 ||
@@ -88,12 +104,15 @@ function countNumberOfLiveNeighbors(cellRow, cellCol) {
   return liveNeighbors;
 }
 
+// Main game loop
 function playGame() {
   let neighborsAlive = 0;
-  let newTable = table.map(arr => arr.slice());
+  // Creates a copy of the matrix to store the new generation (to avoid changing the current generation while it's still been processed)
+  let newTable = table.map((arr) => arr.slice());
 
   let generationsNumber = 0;
 
+  // Main loop, processes the generations each second
   let interval = setInterval(() => {
     for (let i = 0; i < ROWS_NUMBER; i++) {
       for (let j = 0; j < COLS_NUMBER; j++) {
@@ -114,9 +133,12 @@ function playGame() {
         }
       }
     }
-    generationsNumber++;
-    table = newTable.map(arr => arr.slice());
 
+    // Copies the new generation to the current generation
+    table = newTable.map((arr) => arr.slice());
+
+    // Increments the number of generations processed and stops the loop if the desired number of generations is reached
+    generationsNumber++;
     if (generationsNumber == desiredGenerationsNumber || !shouldContinue) {
       clearInterval(interval);
       shouldContinue = false;
