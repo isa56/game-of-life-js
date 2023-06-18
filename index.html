@@ -20,6 +20,7 @@
     </h2>
 
     <div>
+      <button id="openModalBtn">Guide</button>
       <button id="resetBtn">Reset</button>
       <input type="number" id="generations" placeholder="Insert number of generations">
       <button id="gameOfLifeControllerBtn">Start</button>
@@ -1279,6 +1280,24 @@
     Developed by <a href="https://github.com/isa56/game-of-life-js" target="_blank">Isadora G. Ferreira</a> for the
     class DCC063 "Linguagens Formais e Autômatos" - UFJF.
   </footer>
+
+  <!-- How to Play Modal -->
+  <div class="modal-container" id="modal">
+    <div class="modal-body" id="closeModalBtn"></div>
+    <div class="modal">
+      <div class="x-container">
+        <span id="closeModalBtn">&#10005;</span>
+      </div>
+      <h2>How to play</h2>
+      <p>
+        Choose a initial configuration for the game of life by clicking on the cells you want to activate. After that,
+        select the number of generations you want to see in the input on the navigation bar and the click in the "Start" button. You can also leave it blank to see it going indefinitely.
+      </p>
+      <div class="btn-container">
+        <button id="closeModalBtn">OK!</button>
+      </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
